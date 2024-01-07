@@ -1,12 +1,48 @@
-import { Link, Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, Outlet, useParams } from 'react-router-dom';
+
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization:
+      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZTkwMTA4Njg0ZWQ4M2FmZmRiZTg2N2YxNWVmMTEyMSIsInN1YiI6IjY1NmYyYmFkMDg1OWI0MDEzOTUzNGQ1NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.83Wj7B2UybrOdqocgkYqs_kY4bnkeI-P1gPLXe2kR1c',
+  },
+};
 
 export const MovieDetails = () => {
+  const { movieId } = useParams();
+  console.log(movieId);
+
+  const [filmData, setFilmData] = useState([]);
+  //api.themoviedb.org/3/movie/{movie_id}
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
+        options
+      )
+        .then(response => response.json())
+        .then(response => setFilmData(response))
+        .catch(err => console.error(err));
+    };
+
+    fetchData();
+  }, [movieId]);
+
+  const { title, overview } = filmData;
   return (
     <div>
-      <h1>The King (2019)</h1>
+      <img src={filmData} alt="" width="320px" />
+      <h1>{title}</h1>
       <p>User Score: 74%</p>
 
-      <p>This is text bla bla bla</p>
+      <h2>Overview</h2>
+      <p>{overview}</p>
+
+      <h2>Genres</h2>
+      <p>{'text'}</p>
       <ul>
         <li>
           <Link to="/movies/:movieId/cast">Cast</Link>

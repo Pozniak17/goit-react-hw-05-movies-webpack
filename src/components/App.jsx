@@ -5,6 +5,7 @@ import { NavLink, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import { Cast } from './Cast';
 import { Reviews } from './Reviews';
+import NotFoundPage from 'pages/NotFoundPage';
 
 const StyledLink = styled(NavLink)`
   color: black;
@@ -34,6 +35,8 @@ export const App = () => {
           <Route path="/movies/:movieId/cast" element={<Cast />} />
           <Route path="/movies/:movieId/reviews" element={<Reviews />} />
         </Route>
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
