@@ -17,3 +17,5 @@ export const fetchMovies = async () => {
 // api.themoviedb.org/3/trending/movie/{time_window}
 
 // 'https://api.themoviedb.org/3/trending/movie/day?language=en-US';
+
+//api.themoviedb.org/3/movie/{movie_id}
