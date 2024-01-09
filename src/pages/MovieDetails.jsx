@@ -39,7 +39,12 @@ export const MovieDetails = () => {
 
   return (
     <div>
-      <img src={filmData} alt="" width="320px" />
+      <img
+        src={`https://image.tmdb.org/t/p/w500${filmData.poster_path}`}
+        alt=""
+        width="320px"
+      />
+      {/* <img src={filmData} alt="" width="320px" /> */}
       <h1>{title}</h1>
       <p>User Score: {Math.round(popularity / 10)}%</p>
       <h2>Overview</h2>
