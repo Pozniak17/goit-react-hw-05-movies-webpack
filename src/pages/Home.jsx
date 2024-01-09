@@ -1,45 +1,49 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import axios from 'axios';
+import axios from 'axios';
 
-const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZTkwMTA4Njg0ZWQ4M2FmZmRiZTg2N2YxNWVmMTEyMSIsInN1YiI6IjY1NmYyYmFkMDg1OWI0MDEzOTUzNGQ1NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.83Wj7B2UybrOdqocgkYqs_kY4bnkeI-P1gPLXe2kR1c',
-  },
-};
+axios.defaults.baseURL = 'https://api.themoviedb.org/3';
+const key = '7e90108684ed83affdbe867f15ef1121';
 
 export const Home = () => {
   const [data, setData] = useState([]);
-  // тут я буду робити запит на список трендових фільмів на сьогодні
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  // тут я роблю запит на список трендових фільмів на сьогодні
   useEffect(() => {
-    const fetchData = async () => {
-      await fetch(
-        'https://api.themoviedb.org/3/trending/all/day?language=en-US',
-        options
-      )
-        .then(response => response.json())
-        .then(response => setData(response.results))
-        .catch(err => console.error(err));
+    setIsLoading(true);
+
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get(`/trending/movie/day?api_key=${key}`);
+        setData(response.data.results);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setIsLoading(false);
+        // return response.data.results;
+      }
     };
-    fetchData();
+
+    fetchMovies();
   }, []);
 
-  console.log(data);
+  // console.log(object);
   return (
     <div>
       <h1>Trending today</h1>
-      <ul>
-        {data.map(item => (
-          <li key={item.id}>
-            <Link to={`/movies/${item.id}`}>
-              {item.title ? item.title : item.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {error && <p>Whoops, something went wrong: {error.message}</p>}
+      {isLoading ? (
+        <h2>Loading...</h2>
+      ) : (
+        <ul>
+          {data.map(item => (
+            <li key={item.id}>
+              <Link to={`/movies/${item.id}`}>{item.title}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

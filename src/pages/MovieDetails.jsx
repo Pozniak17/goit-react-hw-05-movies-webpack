@@ -19,10 +19,7 @@ export const MovieDetails = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
-        options
-      )
+      await fetch(`https://api.themoviedb.org/3/movie/${movieId}`, options)
         .then(response => response.json())
         .then(response => setFilmData(response))
         .catch(err => console.error(err));
@@ -31,18 +28,20 @@ export const MovieDetails = () => {
     fetchData();
   }, [movieId]);
 
-  const { title, overview } = filmData;
+  const { title, name, overview, popularity } = filmData;
+
+  console.log(filmData);
+
+  // const { name } = filmData.genres;
   return (
     <div>
       <img src={filmData} alt="" width="320px" />
-      <h1>{title}</h1>
-      <p>User Score: 74%</p>
-
+      <h1>{title ? title : name}</h1>
+      <p>User Score: {Math.round(popularity / 10)}%</p>
       <h2>Overview</h2>
       <p>{overview}</p>
-
       <h2>Genres</h2>
-      <p>{'text'}</p>
+      {/* <p>{Object.keys(filmData.genres.name)}</p> */}
       <ul>
         <li>
           <Link to="/movies/:movieId/cast">Cast</Link>
