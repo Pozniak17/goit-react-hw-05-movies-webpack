@@ -1,33 +1,38 @@
 import { Home } from 'pages/Home';
 import { MovieDetails } from 'pages/MovieDetails';
 import { Movies } from 'pages/Movies';
-import { NavLink, Route, Routes } from 'react-router-dom';
-import styled from 'styled-components';
+import { Route, Routes } from 'react-router-dom';
 import { Cast } from './Cast';
 import { Reviews } from './Reviews';
 import NotFoundPage from 'pages/NotFoundPage';
+import { Container, Header, Logo, Link } from './App.styled';
 
-const StyledLink = styled(NavLink)`
-  color: black;
+// const StyledLink = styled(NavLink)`
+//   color: black;
 
-  &.active {
-    color: orange;
-  }
-`;
+//   &.active {
+//     color: orange;
+//   }
+// `;
 
 export const App = () => {
   return (
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <StyledLink to="/">Home</StyledLink>
-          </li>
-          <li>
-            <StyledLink to="/movies">Movies</StyledLink>
-          </li>
-        </ul>
-      </nav>
+    <Container>
+      <Header>
+        <Logo>
+          <span role="img" aria-label="computer icon">
+            🎬
+          </span>{' '}
+          FilmUA Store
+        </Logo>
+
+        <nav>
+          <Link to="/">Home</Link>
+
+          <Link to="/movies">Movies</Link>
+        </nav>
+      </Header>
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movies" element={<Movies />} />
@@ -38,6 +43,6 @@ export const App = () => {
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </div>
+    </Container>
   );
 };
