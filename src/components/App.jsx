@@ -2,7 +2,7 @@ import { Home } from 'pages/Home';
 import { MovieDetails } from 'pages/MovieDetails';
 import { Movies } from 'pages/Movies';
 import { Route, Routes } from 'react-router-dom';
-import { Cast } from './Cast';
+import { Cast } from './Cast/Cast';
 import { Reviews } from './Reviews';
 import NotFoundPage from 'pages/NotFoundPage';
 import { Container, Header, Logo, Link } from './App.styled';

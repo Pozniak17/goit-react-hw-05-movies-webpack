@@ -61,13 +61,20 @@ export const MovieDetails = () => {
 
       <ul>
         <li>
-          <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+          <Link to="cast">Cast</Link>
         </li>
         <li>
-          <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+          <Link to="reviews">Reviews</Link>
         </li>
       </ul>
       <Outlet />
     </div>
   );
 };
+
+{
+  /* {`/movies/${movieId}/cast`} */
+}
+{
+  /* {`/movies/${movieId}/reviews`} */
+}
