@@ -71,10 +71,3 @@ export const MovieDetails = () => {
     </div>
   );
 };
-
-{
-  /* {`/movies/${movieId}/cast`} */
-}
-{
-  /* {`/movies/${movieId}/reviews`} */
-}

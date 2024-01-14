@@ -1,41 +1,45 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 // import { Formik } from 'formik';
 
-const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZTkwMTA4Njg0ZWQ4M2FmZmRiZTg2N2YxNWVmMTEyMSIsInN1YiI6IjY1NmYyYmFkMDg1OWI0MDEzOTUzNGQ1NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.83Wj7B2UybrOdqocgkYqs_kY4bnkeI-P1gPLXe2kR1c',
-  },
-};
+axios.defaults.baseURL = 'https://api.themoviedb.org/3';
+const key = '7e90108684ed83affdbe867f15ef1121';
 
 export const Movies = () => {
   const [inputValue, setInputValue] = useState('');
+  const [fetchData, setFetchData] = useState([]);
+  const [searchClicked, setSearchClicked] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetch(
-        `https://api.themoviedb.org/3/search/movie?query=${inputValue}&include_adult=false&language=en-US&page=1`,
-        options
-      )
-        .then(response => response.json())
-        .then(response => console.log(response.results))
-        .catch(err => console.error(err));
+    const searchQuery = async () => {
+      if (searchClicked) {
+        try {
+          const response = await axios.get(
+            `/search/movie?query=${inputValue}&include_adult=false&language=en-US&page=1&api_key=${key}`
+          );
+          setFetchData(response.data.results);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        } finally {
+          setSearchClicked(false); // Позначте, що запит виконано
+        }
+      }
     };
-    fetchData();
-  }, [inputValue]);
 
-  const handleSubmit = evt => {
-    evt.preventDefault();
-    console.log(inputValue);
-
-    // reset();
-  };
+    searchQuery();
+  }, [inputValue, searchClicked]);
 
   const handleChange = evt => {
     setInputValue(evt.target.value);
-    // this.props.onSubmit({ login });
+  };
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    setSearchClicked(true); //кнопка пошуку була натиснута
+    console.log(inputValue);
+
+    // reset();
   };
 
   // const reset = () => {
@@ -49,16 +53,21 @@ export const Movies = () => {
           type="text"
           name="searchInput"
           placeholder="Enter film"
-          // value={inputValue}
+          value={inputValue}
           onChange={handleChange}
         />
+
         <button type="submit">search</button>
       </form>
 
       <div>
         <ul>
-          {inputValue.map(film => (
-            <li key={film.title}>{film.title}</li>
+          {fetchData.map(({ title, id }) => (
+            <li key={id}>
+              <Link to={`/movies/${id}`}>
+                <p>{title}</p>
+              </Link>
+            </li>
           ))}
         </ul>
       </div>

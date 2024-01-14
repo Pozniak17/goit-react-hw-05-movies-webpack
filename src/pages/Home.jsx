@@ -21,7 +21,6 @@ export const Home = () => {
         setError(true);
       } finally {
         setIsLoading(false);
-        // return response.data.results;
       }
     };
 
@@ -37,9 +36,9 @@ export const Home = () => {
         <h2>Loading...</h2>
       ) : (
         <ul>
-          {data.map(item => (
-            <li key={item.id}>
-              <Link to={`/movies/${item.id}`}>{item.title}</Link>
+          {data.map(({ title, id }) => (
+            <li key={id}>
+              <Link to={`/movies/${id}`}>{title}</Link>
             </li>
           ))}
         </ul>
@@ -47,31 +46,3 @@ export const Home = () => {
     </div>
   );
 };
-
-// export const Home = () => {
-//   const [data, setData] = useState([]);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await axios.get(
-//           'https://api.themoviedb.org/3/trending/all/day?language=en-US',
-//           options
-//         );
-//         setData(response.data.results);
-//       } catch (error) {
-//         console.error(error);
-//       }
-//     };
-
-//     const options = {
-//       // додайте будь-які параметри або конфігурації Axios, які вам потрібні
-//     };
-
-//     fetchData();
-//   }, []);
-
-//   return (
-//     // ваш JSX код тут
-//   );
-// };
