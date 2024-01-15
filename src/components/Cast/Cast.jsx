@@ -36,28 +36,32 @@ export const Cast = () => {
   return (
     <div>
       <List>
-        {cast.map(({ name, id, character, profile_path }) => (
-          <Item key={id}>
-            <div>
-              {profile_path ? (
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${profile_path}`}
-                  width="160px"
-                  alt=""
-                />
-              ) : (
-                <img
-                  src="https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133351928-stock-illustration-default-placeholder-man-and-woman.jpg"
-                  width="160px"
-                  height="240px"
-                  alt=""
-                />
-              )}
-              <p>{name}</p>
-              <p>Character: {character}</p>
-            </div>
-          </Item>
-        ))}
+        {cast.length > 0 ? (
+          cast.map(({ name, id, character, profile_path }) => (
+            <Item key={id}>
+              <div>
+                {profile_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${profile_path}`}
+                    width="160px"
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    src="https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133351928-stock-illustration-default-placeholder-man-and-woman.jpg"
+                    width="160px"
+                    height="240px"
+                    alt=""
+                  />
+                )}
+                <p>{name}</p>
+                <p>Character: {character}</p>
+              </div>
+            </Item>
+          ))
+        ) : (
+          <b>We don't have any casts for this movie.</b>
+        )}
       </List>
     </div>
   );

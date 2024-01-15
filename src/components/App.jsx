@@ -1,9 +1,9 @@
 import { Home } from 'pages/Home';
-import { MovieDetails } from 'pages/MovieDetails';
+import { MovieDetails } from 'pages/MovieDetails/MovieDetails';
 import { Movies } from 'pages/Movies';
 import { Route, Routes } from 'react-router-dom';
 import { Cast } from './Cast/Cast';
-import { Reviews } from './Reviews';
+import { Reviews } from './Rewiws/Reviews';
 import NotFoundPage from 'pages/NotFoundPage';
 import { Container, Header, Logo, Link } from './App.styled';
 

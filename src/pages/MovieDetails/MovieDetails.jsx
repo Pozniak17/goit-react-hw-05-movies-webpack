@@ -1,17 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
 import axios from 'axios';
+import styled from 'styled-components';
+import { Item, List, StyledLink } from './MovieDetails.styled';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const key = '7e90108684ed83affdbe867f15ef1121';
-// const options = {
-//   method: 'GET',
-//   headers: {
-//     accept: 'application/json',
-//     Authorization:
-//       'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZTkwMTA4Njg0ZWQ4M2FmZmRiZTg2N2YxNWVmMTEyMSIsInN1YiI6IjY1NmYyYmFkMDg1OWI0MDEzOTUzNGQ1NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.83Wj7B2UybrOdqocgkYqs_kY4bnkeI-P1gPLXe2kR1c',
-//   },
-// };
 
 export const MovieDetails = () => {
   const { movieId } = useParams();
@@ -59,14 +53,15 @@ export const MovieDetails = () => {
         ))}
       </ul>
 
-      <ul>
-        <li>
-          <Link to="cast">Cast</Link>
-        </li>
-        <li>
-          <Link to="reviews">Reviews</Link>
-        </li>
-      </ul>
+      <List>
+        <Item>
+          <StyledLink to="cast">Cast</StyledLink>
+        </Item>
+
+        <Item>
+          <StyledLink to="reviews">Reviews</StyledLink>
+        </Item>
+      </List>
       <Outlet />
     </div>
   );

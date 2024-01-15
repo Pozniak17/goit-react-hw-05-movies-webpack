@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Item, Title, Wrapper } from './Reviews.styled';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const key = '7e90108684ed83affdbe867f15ef1121';
@@ -34,17 +35,19 @@ export const Reviews = () => {
   console.log(reviews);
 
   return (
-    <div>
+    <Wrapper>
       {reviews.length > 0 ? (
-        reviews.map(item => (
-          <li key={item.id}>
-            <h1>{item.author}</h1>
-            <p>{item.content}</p>
-          </li>
+        reviews.map(({ id, author, author_details: { rating }, content }) => (
+          <Item key={id}>
+            <Title>{author}</Title>
+
+            <p>{content}</p>
+            {rating && <h3>rating: {rating}</h3>}
+          </Item>
         ))
       ) : (
         <b>We don't have any rewiews for this movie.</b>
       )}
-    </div>
+    </Wrapper>
   );
 };
