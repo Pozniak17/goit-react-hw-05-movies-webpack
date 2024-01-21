@@ -1,16 +1,16 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const List = styled.li`
-  display: flex;
-  /* width: 960px; */
-
-  flex-wrap: wrap;
+export const List = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  justify-content: space-evenly;
+  align-items: baseline;
 `;
 
 export const Item = styled.li`
   list-style: none;
-  margin-left: 15px;
   justify-content: center;
 `;
 

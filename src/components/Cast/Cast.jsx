@@ -48,7 +48,7 @@ export const Cast = () => {
                   />
                 ) : (
                   <img
-                    src="https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133351928-stock-illustration-default-placeholder-man-and-woman.jpg"
+                    src="https://img.freepik.com/free-vector/cute-panda-drinking-boba-milk-tea-cartoon-vector-illustration-animal-food-concept-isolated-vector-flat-cartoon-style_138676-1949.jpg?w=740&t=st=1705864050~exp=1705864650~hmac=3749821165d8066276a399b880c44247abd35d3a8102676fd6b4157576907242"
                     width="160px"
                     height="240px"
                     alt=""
