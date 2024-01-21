@@ -1,4 +1,4 @@
-import { Home } from 'pages/Home';
+import { Home } from 'pages/Home/Home';
 import { MovieDetails } from 'pages/MovieDetails/MovieDetails';
 import { Movies } from 'pages/Movies';
 import { Route, Routes } from 'react-router-dom';

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Item, List, Name } from './Home.styled';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const key = '7e90108684ed83affdbe867f15ef1121';
@@ -27,7 +28,7 @@ export const Home = () => {
     fetchMovies();
   }, []);
 
-  // console.log(object);
+  console.log(data);
   return (
     <div>
       <h1>Trending today</h1>
@@ -35,13 +36,21 @@ export const Home = () => {
       {isLoading ? (
         <h2>Loading...</h2>
       ) : (
-        <ul>
-          {data.map(({ title, id }) => (
-            <li key={id}>
-              <Link to={`/movies/${id}`}>{title}</Link>
-            </li>
+        <List>
+          {data.map(({ title, id, poster_path }) => (
+            <Item key={id}>
+              <Link to={`/movies/${id}`}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                  alt=""
+                  width="200px"
+                  height="300px"
+                />
+                {title}
+              </Link>
+            </Item>
           ))}
-        </ul>
+        </List>
       )}
     </div>
   );
