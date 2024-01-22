@@ -1,46 +1,58 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 // import { Formik } from 'formik';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const key = '7e90108684ed83affdbe867f15ef1121';
 
 export const Movies = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [fetchData, setFetchData] = useState([]);
-  const [searchClicked, setSearchClicked] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  // const [inputValue, setInputValue] = useState('');
+  // const [searchClicked, setSearchClicked] = useState(false);
+
+  // якщо немає null, то вертай пустий рядок ""
+  const queryName = searchParams.get('query') ?? '';
+  console.log(queryName);
 
   useEffect(() => {
-    const searchQuery = async () => {
-      if (searchClicked) {
-        try {
-          const response = await axios.get(
-            `/search/movie?query=${inputValue}&include_adult=false&language=en-US&page=1&api_key=${key}`
-          );
-          setFetchData(response.data.results);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        } finally {
-          setSearchClicked(false); // Позначте, що запит виконано
-        }
+    if (queryName === '') {
+      setMovies([]);
+      return;
+    }
+
+    const fetchMovies = async () => {
+      try {
+        setIsLoading(true);
+        const response = await axios.get(
+          `/search/movie?query=${queryName}&include_adult=false&language=en-US&page=1&api_key=${key}`
+        );
+
+        setMovies(response.data.results);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    searchQuery();
-  }, [inputValue, searchClicked]);
-
-  const handleChange = evt => {
-    setInputValue(evt.target.value);
-  };
+    fetchMovies();
+  }, [queryName]);
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    setSearchClicked(true); //кнопка пошуку була натиснута
-    console.log(inputValue);
-
-    // reset();
+    const form = evt.currentTarget;
+    setSearchParams({ query: form.elements.query.value });
   };
+
+  // const updateQueryString = name => {
+  //   const nextParams = name !== '' ? { name } : {};
+  //   setSearchParams(nextParams);
+  // };
 
   // const reset = () => {
   //   setInputValue('');
@@ -51,26 +63,31 @@ export const Movies = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="searchInput"
           placeholder="Enter film"
-          value={inputValue}
-          onChange={handleChange}
+          value={queryName}
+          onChange={e => setSearchParams({ query: e.target.value })}
         />
 
         <button type="submit">search</button>
       </form>
 
-      <div>
-        <ul>
-          {fetchData.map(({ title, id }) => (
-            <li key={id}>
-              <Link to={`/movies/${id}`}>
-                <p>{title}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {error && <p>Whoops, something went wrong: {error.message}</p>}
+
+      {isLoading ? (
+        <h2>Loading...</h2>
+      ) : (
+        <div>
+          <ul>
+            {movies.map(({ title, id }) => (
+              <li key={id}>
+                <Link to={`/movies/${id}`}>
+                  <p>{title}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </>
   );
 };
