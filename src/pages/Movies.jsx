@@ -15,7 +15,7 @@ export const Movies = () => {
   // const [inputValue, setInputValue] = useState('');
   // const [searchClicked, setSearchClicked] = useState(false);
 
-  // якщо немає null, то вертай пустий рядок ""
+  // якщо немає null, то вертай пустий рядок "" - це на випад коли null в input, value не може бути null'ом
   const queryName = searchParams.get('query') ?? '';
   console.log(queryName);
 
@@ -49,10 +49,16 @@ export const Movies = () => {
     setSearchParams({ query: form.elements.query.value });
   };
 
-  // const updateQueryString = name => {
-  //   const nextParams = name !== '' ? { name } : {};
-  //   setSearchParams(nextParams);
-  // };
+  // функція видалення значення, якщо запит пустий
+  const updateQueryString = evt => {
+    // const nextParams = query !== '' ? { query } : {};
+    // setSearchParams(nextParams);
+
+    if (evt.target.value === '') {
+      return setSearchParams({});
+    }
+    setSearchParams({ query: evt.target.value });
+  };
 
   // const reset = () => {
   //   setInputValue('');
@@ -65,7 +71,7 @@ export const Movies = () => {
           type="text"
           placeholder="Enter film"
           value={queryName}
-          onChange={e => setSearchParams({ query: e.target.value })}
+          onChange={updateQueryString}
         />
 
         <button type="submit">search</button>
