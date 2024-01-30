@@ -15,6 +15,7 @@ export const Reviews = () => {
 
   useEffect(() => {
     setIsLoading(true);
+
     const fetchReviewsById = async () => {
       try {
         const response = await axios.get(
@@ -36,7 +37,11 @@ export const Reviews = () => {
 
   return (
     <Wrapper>
-      {reviews.length > 0 ? (
+      {error && <p>Whoops, something went wrong: {error.message}</p>}
+
+      {isLoading ? (
+        <h2>Loading...</h2>
+      ) : reviews.length > 0 ? (
         reviews.map(({ id, author, author_details: { rating }, content }) => (
           <Item key={id}>
             <Title>{author}</Title>

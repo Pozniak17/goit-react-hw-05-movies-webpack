@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
 import axios from 'axios';
-import styled from 'styled-components';
+import { Outlet, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { Item, List, StyledLink } from './MovieDetails.styled';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';

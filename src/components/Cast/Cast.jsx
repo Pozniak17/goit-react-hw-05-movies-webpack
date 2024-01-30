@@ -15,6 +15,7 @@ export const Cast = () => {
 
   useEffect(() => {
     setIsLoading(true);
+
     const fetchCastById = async () => {
       try {
         const response = await axios.get(
@@ -35,34 +36,40 @@ export const Cast = () => {
 
   return (
     <div>
-      <List>
-        {cast.length > 0 ? (
-          cast.map(({ name, id, character, profile_path }) => (
-            <Item key={id}>
-              <div>
-                {profile_path ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${profile_path}`}
-                    width="160px"
-                    alt=""
-                  />
-                ) : (
-                  <img
-                    src="https://img.freepik.com/free-vector/cute-panda-drinking-boba-milk-tea-cartoon-vector-illustration-animal-food-concept-isolated-vector-flat-cartoon-style_138676-1949.jpg?w=740&t=st=1705864050~exp=1705864650~hmac=3749821165d8066276a399b880c44247abd35d3a8102676fd6b4157576907242"
-                    width="160px"
-                    height="240px"
-                    alt=""
-                  />
-                )}
-                <p>{name}</p>
-                <p>Character: {character}</p>
-              </div>
-            </Item>
-          ))
-        ) : (
-          <b>We don't have any casts for this movie.</b>
-        )}
-      </List>
+      {error && <p>Whoops, something went wrong: {error.message}</p>}
+
+      {isLoading ? (
+        <h2>Loading...</h2>
+      ) : (
+        <List>
+          {cast.length > 0 ? (
+            cast.map(({ name, id, character, profile_path }) => (
+              <Item key={id}>
+                <div>
+                  {profile_path ? (
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${profile_path}`}
+                      width="160px"
+                      alt=""
+                    />
+                  ) : (
+                    <img
+                      src="https://img.freepik.com/free-vector/cute-panda-drinking-boba-milk-tea-cartoon-vector-illustration-animal-food-concept-isolated-vector-flat-cartoon-style_138676-1949.jpg?w=740&t=st=1705864050~exp=1705864650~hmac=3749821165d8066276a399b880c44247abd35d3a8102676fd6b4157576907242"
+                      width="160px"
+                      height="240px"
+                      alt=""
+                    />
+                  )}
+                  <p>{name}</p>
+                  <p>Character: {character}</p>
+                </div>
+              </Item>
+            ))
+          ) : (
+            <b>We don't have any casts for this movie.</b>
+          )}
+        </List>
+      )}
     </div>
   );
 };
