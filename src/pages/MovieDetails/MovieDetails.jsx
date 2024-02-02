@@ -1,13 +1,17 @@
+import { MdArrowBackIos } from 'react-icons/md';
 import axios from 'axios';
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Item, List, StyledLink } from './MovieDetails.styled';
+import { BackLink, Item, List, StyledLink } from './MovieDetails.styled';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const key = '7e90108684ed83affdbe867f15ef1121';
 
 export const MovieDetails = () => {
   const { movieId } = useParams();
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/';
+  console.log(location.state);
   console.log(movieId);
 
   const [filmData, setFilmData] = useState({});
@@ -32,6 +36,10 @@ export const MovieDetails = () => {
 
   return (
     <div>
+      <BackLink to={backLinkHref}>
+        <MdArrowBackIos />
+        BACK TO MOVIES
+      </BackLink>
       <img
         src={`https://image.tmdb.org/t/p/w500${filmData.poster_path}`}
         alt=""

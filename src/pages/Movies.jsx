@@ -1,12 +1,15 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 // import { Formik } from 'formik';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const key = '7e90108684ed83affdbe867f15ef1121';
 
 export const Movies = () => {
+  const location = useLocation();
+  console.log(location);
+
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -20,10 +23,7 @@ export const Movies = () => {
   console.log(queryName);
 
   useEffect(() => {
-    if (queryName === '') {
-      setMovies([]);
-      return;
-    }
+    if (queryName === '') return;
 
     const fetchMovies = async () => {
       try {
@@ -86,7 +86,7 @@ export const Movies = () => {
           <ul>
             {movies.map(({ title, id }) => (
               <li key={id}>
-                <Link to={`/movies/${id}`}>
+                <Link state={{ from: location }} to={`/movies/${id}`}>
                   <p>{title}</p>
                 </Link>
               </li>
