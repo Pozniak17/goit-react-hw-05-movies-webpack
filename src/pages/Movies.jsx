@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { Item, List } from './Home/Home.styled';
 // import { Formik } from 'formik';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
@@ -51,18 +52,11 @@ export const Movies = () => {
 
   // функція видалення значення, якщо запит пустий
   const updateQueryString = evt => {
-    // const nextParams = query !== '' ? { query } : {};
-    // setSearchParams(nextParams);
-
     if (evt.target.value === '') {
       return setSearchParams({});
     }
     setSearchParams({ query: evt.target.value });
   };
-
-  // const reset = () => {
-  //   setInputValue('');
-  // };
 
   return (
     <>
@@ -83,15 +77,30 @@ export const Movies = () => {
         <h2>Loading...</h2>
       ) : (
         <div>
-          <ul>
-            {movies.map(({ title, id }) => (
-              <li key={id}>
+          <List>
+            {movies.map(({ title, poster_path, id }) => (
+              <Item key={id}>
                 <Link state={{ from: location }} to={`/movies/${id}`}>
+                  {poster_path ? (
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                      alt="film"
+                      width="200px"
+                      height="300px"
+                    />
+                  ) : (
+                    <img
+                      src={`https://media.istockphoto.com/id/1452662817/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=170667a&w=0&k=20&c=KaRW6O_DcZXEFbMPS-3DrDP5z28TIdBoBzcCliubxyY=`}
+                      alt="film"
+                      width="200px"
+                      height="300px"
+                    />
+                  )}
                   <p>{title}</p>
                 </Link>
-              </li>
+              </Item>
             ))}
-          </ul>
+          </List>
         </div>
       )}
     </>

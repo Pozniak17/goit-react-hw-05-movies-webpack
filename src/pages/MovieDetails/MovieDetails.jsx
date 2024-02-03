@@ -1,3 +1,4 @@
+import { getYear } from 'date-fns';
 import { MdArrowBackIos } from 'react-icons/md';
 import axios from 'axios';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
@@ -11,29 +12,32 @@ export const MovieDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
+
   console.log(location.state);
   console.log(movieId);
 
   const [filmData, setFilmData] = useState({});
-  //api.themoviedb.org/3/movie/{movie_id}
 
   useEffect(() => {
     const fetchMoviesById = async () => {
       const response = await axios.get(`/movie/${movieId}?api_key=${key}`);
       setFilmData(response.data);
-      // return response.data;
     };
 
     fetchMoviesById();
   }, [movieId]);
 
-  const { title, overview, popularity } = filmData;
-
   const filmGenres = filmData.genres || [];
   const names = filmGenres.map(genre => genre.name);
 
-  // console.log(filmGanres);
+  // const dateInHeader = date => {
+  //   return format(Date(date), 'yyyy');
+  // };
 
+  const { title, overview, vote_average, release_date } = filmData;
+  const result = getYear(new Date(release_date));
+
+  // dateInHeader(release_date);
   return (
     <div>
       <BackLink to={backLinkHref}>
@@ -45,9 +49,11 @@ export const MovieDetails = () => {
         alt=""
         width="320px"
       />
-      {/* <img src={filmData} alt="" width="320px" /> */}
-      <h1>{title}</h1>
-      <p>User Score: {Math.round(popularity / 10)}%</p>
+
+      <h1>
+        {title} ({result})
+      </h1>
+      <p>User Score: {(vote_average * 10).toFixed(0)}%</p>
       <h2>Overview</h2>
       <p>{overview}</p>
       <h2>genres</h2>

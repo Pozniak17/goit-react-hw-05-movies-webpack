@@ -42,7 +42,7 @@ export const Home = () => {
               <Link to={`/movies/${id}`}>
                 <img
                   src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-                  alt=""
+                  alt="film"
                   width="200px"
                   height="300px"
                 />
