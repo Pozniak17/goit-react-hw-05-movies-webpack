@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
-import { Item, List } from './Home/Home.styled';
+import { Item, List } from '../Home/Home.styled';
 // import { Formik } from 'formik';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
@@ -46,8 +46,8 @@ export const Movies = () => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    const form = evt.currentTarget;
-    setSearchParams({ query: form.elements.query.value });
+    // const form = evt.currentTarget;
+    // setSearchParams({ query: form.elements.query.value });
   };
 
   // функція видалення значення, якщо запит пустий
