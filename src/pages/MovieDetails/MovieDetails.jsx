@@ -1,14 +1,15 @@
+import axios from 'axios';
 import { getYear } from 'date-fns';
 import { MdArrowBackIos } from 'react-icons/md';
-import axios from 'axios';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { BackLink, Item, List, StyledLink } from './MovieDetails.styled';
+import { Suspense } from 'react';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const key = '7e90108684ed83affdbe867f15ef1121';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const { movieId } = useParams();
   const location = useLocation();
   // console.log(location);
@@ -73,7 +74,12 @@ export const MovieDetails = () => {
           <StyledLink to="reviews">Reviews</StyledLink>
         </Item>
       </List>
-      <Outlet />
+
+      <Suspense fallback={<div>Loading subpage...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };
+
+export default MovieDetails;

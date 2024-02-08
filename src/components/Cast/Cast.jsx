@@ -6,7 +6,7 @@ import { List, Item } from './Cast.styled';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const key = '7e90108684ed83affdbe867f15ef1121';
 
-export const Cast = () => {
+const Cast = () => {
   const { movieId } = useParams();
 
   const [cast, setCast] = useState([]);
@@ -73,3 +73,5 @@ export const Cast = () => {
     </div>
   );
 };
+
+export default Cast;

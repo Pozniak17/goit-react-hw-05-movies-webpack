@@ -6,7 +6,7 @@ import { Item, Title, Wrapper } from './Reviews.styled';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const key = '7e90108684ed83affdbe867f15ef1121';
 
-export const Reviews = () => {
+const Reviews = () => {
   const { movieId } = useParams();
 
   const [reviews, setReviews] = useState([]);
@@ -56,3 +56,5 @@ export const Reviews = () => {
     </Wrapper>
   );
 };
+
+export default Reviews;

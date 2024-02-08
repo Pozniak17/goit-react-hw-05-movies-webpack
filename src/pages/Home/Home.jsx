@@ -6,7 +6,7 @@ import { Item, List } from './Home.styled';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const key = '7e90108684ed83affdbe867f15ef1121';
 
-export const Home = () => {
+const Home = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -55,3 +55,5 @@ export const Home = () => {
     </div>
   );
 };
+
+export default Home;

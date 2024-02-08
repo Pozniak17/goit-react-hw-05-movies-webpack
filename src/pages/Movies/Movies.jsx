@@ -7,7 +7,7 @@ import { Item, List } from '../Home/Home.styled';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const key = '7e90108684ed83affdbe867f15ef1121';
 
-export const Movies = () => {
+const Movies = () => {
   const location = useLocation();
   console.log(location);
 
@@ -106,3 +106,5 @@ export const Movies = () => {
     </>
   );
 };
+
+export default Movies;
