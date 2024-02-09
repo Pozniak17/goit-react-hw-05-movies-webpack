@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import axios from 'axios';
-import { Item, List } from './Home.styled';
+import { Item, List, StarIcon } from './Home.styled';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const key = '7e90108684ed83affdbe867f15ef1121';
@@ -39,6 +40,7 @@ const Home = () => {
         <List>
           {data.map(({ title, id, poster_path }) => (
             <Item key={id}>
+              <StarIcon />
               <Link to={`/movies/${id}`}>
                 <img
                   src={`https://image.tmdb.org/t/p/w500${poster_path}`}

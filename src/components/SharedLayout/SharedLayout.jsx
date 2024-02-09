@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { Container, Header, Logo, Link } from './SharedLayout.styled';
+import { Container, Header, Logo, List, Link } from './SharedLayout.styled';
 import { Suspense } from 'react';
 
 export const SharedLayout = () => {
@@ -14,9 +14,19 @@ export const SharedLayout = () => {
         </Logo>
 
         <nav>
-          <Link to="/">Home</Link>
+          <List>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
 
-          <Link to="/movies">Movies</Link>
+            <li>
+              <Link to="/movies">Movies</Link>
+            </li>
+
+            <li>
+              <Link to="/library">My Library</Link>
+            </li>
+          </List>
         </nav>
       </Header>
 
