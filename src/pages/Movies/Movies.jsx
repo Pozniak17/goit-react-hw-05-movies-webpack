@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
-import { Item, List, StarIcon } from '../Home/Home.styled';
+import { Item, List, BookmarkIcon } from '../Home/Home.styled';
 // import { Formik } from 'formik';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
@@ -80,7 +80,7 @@ const Movies = () => {
           <List>
             {movies.map(({ title, poster_path, id }) => (
               <Item key={id}>
-                <StarIcon />
+                <BookmarkIcon />
                 <Link state={{ from: location }} to={`/movies/${id}`}>
                   {poster_path ? (
                     <img

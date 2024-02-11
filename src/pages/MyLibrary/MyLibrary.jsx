@@ -1,4 +1,4 @@
-import { Item, List, StarIcon } from 'pages/Home/Home.styled';
+import { Item, List, BookmarkIcon } from 'pages/Home/Home.styled';
 
 export const MyLibrary = () => {
   return (
@@ -6,7 +6,7 @@ export const MyLibrary = () => {
       <h2> Favorite movies</h2>
       <List>
         <Item>
-          <StarIcon />
+          <BookmarkIcon />
         </Item>
       </List>
     </>
