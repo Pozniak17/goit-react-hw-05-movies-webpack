@@ -1,5 +1,5 @@
+import { FaBookmark } from 'react-icons/fa';
 import styled from 'styled-components';
-import { FaStar } from 'react-icons/fa';
 
 export const List = styled.ul`
   display: grid;
@@ -8,18 +8,18 @@ export const List = styled.ul`
   justify-items: center;
 `;
 
-export const StarIcon = styled(FaStar)`
+export const BookmarkIcon = styled(FaBookmark)`
   position: absolute;
   visibility: hidden;
-  color: yellow;
+  color: #dac2c2;
   right: 20px;
   top: 15px;
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
   cursor: pointer;
 
   :hover {
-    color: orange;
+    color: #bd0808fc;
   }
 `;
 
@@ -29,6 +29,7 @@ export const Item = styled.li`
   background-color: #cccccc;
   text-align: center;
   border-radius: 12px;
+  /* overflow: hidden; Додано, щоб контент не виходив за межі елементу */
 
   box-shadow: rgba(0, 0, 0, 0.3) 10px 10px 8px 2px;
 
@@ -37,7 +38,7 @@ export const Item = styled.li`
     transition: transform 0.3s ease; /* Плавний перехід */
   }
 
-  &:hover > ${StarIcon} {
+  &:hover > ${BookmarkIcon} {
     visibility: visible;
   }
 `;
