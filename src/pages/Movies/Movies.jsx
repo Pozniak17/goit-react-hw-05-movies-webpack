@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { Item, List, BookmarkIcon } from '../Home/Home.styled';
+import { FormMovies } from 'components/FormMovies/FormMovies';
 // import { Formik } from 'formik';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
@@ -60,16 +61,11 @@ const Movies = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Enter film"
-          value={queryName}
-          onChange={updateQueryString}
-        />
-
-        <button type="submit">search</button>
-      </form>
+      <FormMovies
+        onSubmit={handleSubmit}
+        value={queryName}
+        onChange={updateQueryString}
+      />
 
       {error && <p>Whoops, something went wrong: {error.message}</p>}
 
