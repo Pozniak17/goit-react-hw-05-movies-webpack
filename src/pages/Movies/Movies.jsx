@@ -45,27 +45,17 @@ const Movies = () => {
     fetchMovies();
   }, [queryName]);
 
-  const handleSubmit = evt => {
-    evt.preventDefault();
-    // const form = evt.currentTarget;
-    // setSearchParams({ query: form.elements.query.value });
-  };
-
   // функція видалення значення, якщо запит пустий
-  const updateQueryString = evt => {
-    if (evt.target.value === '') {
+  const updateQueryString = value => {
+    if (value === '') {
       return setSearchParams({});
     }
-    setSearchParams({ query: evt.target.value });
+    setSearchParams({ query: value });
   };
 
   return (
     <>
-      <FormMovies
-        onSubmit={handleSubmit}
-        value={queryName}
-        onChange={updateQueryString}
-      />
+      <FormMovies value={queryName} onChange={updateQueryString} />
 
       {error && <p>Whoops, something went wrong: {error.message}</p>}
 
