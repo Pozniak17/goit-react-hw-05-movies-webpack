@@ -30,24 +30,6 @@ const Home = () => {
     fetchMovies();
   }, []);
 
-  // 'https://api.themoviedb.org/3/find/609681?external_source=imdb_id'
-
-  //Додавання в LocalStorage
-  // const handleBookmarkClick = movieId => {
-  //   // Перевірка, чи вже є фільм в закладках
-  //   if (bookmarkedMovies.includes(movieId)) {
-  //     // Якщо фільм вже є в закладках, видаліть його
-  //     const updatedBookmarks = bookmarkedMovies.filter(id => id !== movieId);
-  //     setBookmarkedMovies(updatedBookmarks);
-  //   } else {
-  //     // Якщо фільму немає в закладках, додайте його
-  //     const updatedBookmarks = [...bookmarkedMovies, movieId];
-  //     setBookmarkedMovies(updatedBookmarks);
-  //   }
-  //   // Записати оновлені закладки в localStorage
-  //   localStorage.setItem('bookmarkedMovies', JSON.stringify(bookmarkedMovies));
-  // };
-
   console.log(data);
   return (
     <div>

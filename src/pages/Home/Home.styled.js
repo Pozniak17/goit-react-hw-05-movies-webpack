@@ -28,7 +28,7 @@ export const Item = styled.li`
   padding: 10px;
   background-color: #cccccc;
   text-align: center;
-  border-radius: 12px;
+  border-radius: ${props => props.theme.radii.big}; //12px
   /* overflow: hidden; Додано, щоб контент не виходив за межі елементу */
 
   box-shadow: rgba(0, 0, 0, 0.3) 10px 10px 8px 2px;

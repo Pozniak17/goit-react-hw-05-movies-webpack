@@ -5,13 +5,13 @@ export const Wrapper = styled.div`
   display: inline-flex;
   align-items: center;
   position: relative;
-  margin-bottom: 16px;
+  margin-bottom: ${props => props.theme.spacing(4)}; //16px
   text-transform: uppercase;
 `;
 
 export const Input = styled.input`
   padding: 8px 32px 8px 8px;
-  border-radius: 4px;
+  border-radius: ${props => props.theme.radii.normal};
   font: inherit;
 `;
 

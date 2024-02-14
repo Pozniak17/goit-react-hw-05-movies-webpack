@@ -12,15 +12,15 @@ export const Header = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 8px 0;
-  margin-bottom: 16px;
-  border-bottom: 1px solid black;
+  margin-bottom: ${props => props.theme.spacing(4)}; //16px
+  border-bottom: ${props => props.theme.borders.normal} black;
 `;
 
 export const List = styled.ul`
   display: flex;
 
   > li {
-    margin-right: 12px;
+    margin-right: ${props => props.theme.spacing(3)}; //12px
 
     &:last-child {
       margin-right: 0px;
@@ -29,19 +29,19 @@ export const List = styled.ul`
 `;
 
 export const Logo = styled.p`
-  font-weight: 700;
+  font-weight: ${props => props.theme.fontWeights.larger}; //500
   margin: 0;
 `;
 
 export const Link = styled(NavLink)`
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: ${props => props.theme.radii.normal};
   text-decoration: none;
-  color: black;
-  font-weight: 500;
+  color: ${props => props.theme.colors.black};
+  font-weight: ${props => props.theme.fontWeights.larger}; //500
 
   &.active {
-    color: white;
+    color: ${props => props.theme.colors.white};
     background-color: #9c27b0;
   }
 `;

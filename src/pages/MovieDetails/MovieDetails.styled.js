@@ -4,13 +4,13 @@ import styled from 'styled-components';
 export const StyledLink = styled(NavLink)`
   /* background-color: yellow; */
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: ${props => props.theme.radii.normal}; //4px
   text-decoration: none;
-  color: black;
-  font-weight: 500;
+  color: ${props => props.theme.colors.black};
+  font-weight: ${props => props.theme.fontWeights.larger}; //500
 
   &.active {
-    color: white;
+    color: ${props => props.theme.colors.white};
     background-color: #9c27b0;
   }
 `;
@@ -18,7 +18,7 @@ export const StyledLink = styled(NavLink)`
 export const List = styled.ul`
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: ${props => props.theme.spacing(5)}; //20px
   text-align: center;
 `;
 
@@ -27,8 +27,8 @@ export const Item = styled.li`
 `;
 
 export const BackLink = styled(Link)`
-  font-weight: 400;
-  color: black;
+  font-weight: ${props => props.theme.fontWeights.normal}; //400
+  color: ${props => props.theme.colors.black};
   background-color: #3f51b524;
   text-decoration: none;
   display: flex;

@@ -2,7 +2,7 @@ import { Field, Form } from 'formik';
 import styled from 'styled-components';
 
 export const FormikForm = styled(Form)`
-  margin-bottom: 20px;
+  margin-bottom: ${props => props.theme.spacing(5)}; //20px
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,9 +10,9 @@ export const FormikForm = styled(Form)`
 
 export const Input = styled(Field)`
   text-align: center;
-  width: 200px;
+  width: ${props => props.theme.sizes[1]}px; //200px
   height: 25px;
-  font-weight: 600;
+  font-weight: ${props => props.theme.fontWeights.big}; //600
   font-size: larger;
 `;
 

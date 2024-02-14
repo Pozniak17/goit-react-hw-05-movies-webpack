@@ -1,4 +1,4 @@
-import { Formik, Form, Field } from 'formik';
+import { Formik } from 'formik';
 import { FormButton, FormikForm, Input } from './FormMovies.styled';
 
 const initialValues = {
